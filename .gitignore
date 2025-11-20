@@ -1,0 +1,5 @@
+static/*.mp4
+static/*.jpg
+static/*.png
+*.pyc
+__pycache__/
