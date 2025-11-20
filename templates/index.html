@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON2Video Lite</title>
+<style>
+body { font-family: Arial; padding: 20px; }
+textarea { width: 100%; height: 300px; }
+button { padding: 10px 20px; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h2>JSON → Video Generator</h2>
+
+<textarea id="json"></textarea>
+<br>
+<button onclick="renderVideo()">Render</button>
+
+<p id="status"></p>
+
+<script>
+async function renderVideo() {
+  let js = document.getElementById("json").value;
+  document.getElementById("status").innerHTML = "Sending...";
+
+  let res = await fetch("/render", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: js
+  });
+
+  let data = await res.json();
+  document.getElementById("status").innerHTML =
+    "Job ID: " + data.job_id + "<br>Status: Processing";
+}
+</script>
+
+</body>
+</html>
